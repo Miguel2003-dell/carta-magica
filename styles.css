@@ -625,18 +625,23 @@ h1 {
 
 @media (max-width: 600px) {
 
-    /* ---- Páginas: padding superior más grande para celular ---- */
+    /* ---- Páginas: en vez de centrar (lo cual corta el texto de arriba
+       cuando el contenido es más alto que la pantalla), lo alineamos
+       arriba y dejamos que se pueda hacer scroll normal ---- */
     .page {
-        padding: 60px 16px 24px;
+        align-items: flex-start;
+        padding: 70px 16px 90px;
     }
 
-    /* ---- Botón música: bajar para que no tape ---- */
+    /* ---- Botón música: fijo abajo, alejado del texto ---- */
     .music {
-        top: auto;
+        position: fixed;
+        top: auto !important;
         bottom: 14px;
         right: 14px;
         padding: 8px 12px;
         font-size: 13px;
+        z-index: 30;
     }
 
     .owl {
@@ -645,6 +650,12 @@ h1 {
 
     .letter {
         padding: 35px 23px;
+        margin-top: 10px;
+    }
+
+    .final-inner,
+    .map {
+        margin-top: 10px;
     }
 
     .recipient {
@@ -682,4 +693,4 @@ h1 {
         font-size: 16px;
     }
 
-} 
+}
