@@ -1,197 +1,191 @@
+```javascript
 const music = document.getElementById("music");
-const musicBtn = document.getElementById("musicBtn");
+const musicButton = document.getElementById("musicButton");
 
 const intro = document.getElementById("intro");
-const letterSection = document.getElementById("letterSection");
-
-const mapSecret = document.getElementById("mapSecret");
-
+const letter = document.getElementById("letter");
 const mapSection = document.getElementById("mapSection");
 const finalSection = document.getElementById("finalSection");
 
+const openLetterButton = document.getElementById("openLetter");
+const continueToMapButton = document.getElementById("continueToMap");
+
 const swearButton = document.getElementById("swearButton");
+const mapSecret = document.getElementById("mapSecret");
+
+const finalButton = document.getElementById("finalButton");
 
 
 /* =========================================
    ABRIR CARTA
 ========================================= */
 
-function openLetter() {
+openLetterButton.addEventListener("click", async () => {
 
     intro.classList.add("hidden");
 
-    letterSection.classList.add("show");
+    letter.classList.remove("hidden");
 
-    musicBtn.classList.add("show");
-
+    musicButton.classList.remove("hidden");
 
     /*
-     * El usuario acaba de hacer clic,
-     * por lo que el navegador permite
-     * iniciar la música.
+     * La música empieza después del click,
+     * así que el navegador permite reproducirla.
      */
 
     music.volume = 0.55;
 
+    try {
+        await music.play();
 
-    music.play()
-        .then(() => {
+        musicButton.textContent = "🎵 Música: ON";
 
-            musicBtn.textContent =
-                "🎵 Música: ON";
+    } catch (error) {
 
-        })
-        .catch(() => {
+        console.log("No se pudo iniciar la música:", error);
 
-            musicBtn.textContent =
-                "🎵 Tocar música";
+        musicButton.textContent = "🎵 Música";
+    }
 
-        });
-
+    createMagic(50);
 
     /*
-     * Partículas mágicas
+     * Nos aseguramos de que empiece
+     * desde arriba de la carta.
      */
 
-    createMagic(55);
-
-
-    /*
-     * Llevar al usuario a la carta.
-     */
-
-    setTimeout(() => {
-
-        letterSection.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
-    }, 250);
-}
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
 
 
 /* =========================================
-   MÚSICA
+   BOTÓN DE MÚSICA
 ========================================= */
 
-function toggleMusic() {
+musicButton.addEventListener("click", async () => {
 
     if (music.paused) {
 
-        music.play();
+        try {
+            await music.play();
 
-        musicBtn.textContent =
-            "🎵 Música: ON";
+            musicButton.textContent = "🎵 Música: ON";
+
+        } catch (error) {
+
+            console.log(error);
+        }
 
     } else {
 
         music.pause();
 
-        musicBtn.textContent =
-            "🎵 Música: OFF";
+        musicButton.textContent = "🔇 Música: OFF";
     }
-}
+});
 
 
 /* =========================================
-   REVELAR EL MAPA
+   CARTA → MAPA
 ========================================= */
 
-function revealMap() {
+continueToMapButton.addEventListener("click", () => {
 
     /*
-     * Evitamos que la animación
-     * se pueda activar varias veces.
+     * Quitamos completamente la carta.
      */
 
-    if (mapSecret.classList.contains("revealed")) {
+    letter.classList.add("hidden");
+
+    /*
+     * Mostramos el mapa.
+     */
+
+    mapSection.classList.remove("hidden");
+
+    /*
+     * Volvemos al principio de la nueva etapa.
+     */
+
+    window.scrollTo({
+        top: 0,
+        behavior: "instant"
+    });
+
+    createMagic(35);
+});
+
+
+/* =========================================
+   JURAMENTO DEL MAPA
+========================================= */
+
+swearButton.addEventListener("click", () => {
+
+    /*
+     * Evita que se pueda activar varias veces.
+     */
+
+    if (!mapSecret.classList.contains("hidden")) {
         return;
     }
 
-
-    /*
-     * Revelar el contenido secreto.
-     */
-
-    mapSecret.classList.add("revealed");
-
-
-    /*
-     * Efectos mágicos.
-     */
-
-    createMagic(35);
-
-    createFootprints();
-
-
-    /*
-     * Cambiar la frase del botón.
-     */
+    mapSecret.classList.remove("hidden");
 
     swearButton.textContent =
         "✦ Los secretos han sido revelados ✦";
 
+    swearButton.disabled = true;
 
-    swearButton.style.cursor =
-        "default";
+    swearButton.style.cursor = "default";
 
+    swearButton.style.opacity = "0.6";
 
-    swearButton.style.textDecoration =
-        "none";
-}
+    createMagic(70);
+
+    createFootprints();
+});
 
 
 /* =========================================
-   MENSAJE FINAL
+   REVELAR MENSAJE FINAL
 ========================================= */
 
-function showFinal() {
+finalButton.addEventListener("click", () => {
 
     /*
-     * Ocultar el mapa.
+     * Desaparece completamente el mapa.
      */
 
     mapSection.classList.add("hidden");
 
-
     /*
-     * Mostrar mensaje final.
+     * Aparece el mensaje final.
      */
 
     finalSection.classList.remove("hidden");
 
-
     /*
-     * Efectos mágicos.
-
+     * Regresamos arriba de la nueva pantalla.
      */
 
-    createMagic(40);
+    window.scrollTo({
+        top: 0,
+        behavior: "instant"
+    });
 
-
-    /*
-     * Esperamos un poco antes de
-     * llevar al usuario al mensaje.
-     */
-
-    setTimeout(() => {
-
-        finalSection.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    }, 150);
-}
+    createMagic(100);
+});
 
 
 /* =========================================
    PARTÍCULAS MÁGICAS
 ========================================= */
 
-function createMagic(amount) {
+function createMagic(amount = 30) {
 
     const symbols = [
         "✨",
@@ -201,132 +195,109 @@ function createMagic(amount) {
         "🪄"
     ];
 
+    for (let i = 0; i < amount; i++) {
 
-    for (
-        let i = 0;
-        i < amount;
-        i++
-    ) {
+        const particle = document.createElement("div");
+
+        particle.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        particle.style.position = "fixed";
+
+        particle.style.left =
+            Math.random() * 100 + "vw";
+
+        particle.style.top =
+            Math.random() * 100 + "vh";
+
+        particle.style.pointerEvents = "none";
+
+        particle.style.zIndex = "9999";
+
+        particle.style.fontSize =
+            (Math.random() * 1.2 + 0.7) + "rem";
+
+        particle.style.opacity = "0";
+
+        particle.style.transition =
+            "all 1.8s ease-out";
+
+        document.body.appendChild(particle);
+
+
+        requestAnimationFrame(() => {
+
+            particle.style.opacity =
+                Math.random() * 0.7 + 0.3;
+
+            particle.style.transform =
+                `translate(
+                    ${(Math.random() - 0.5) * 200}px,
+                    ${(Math.random() - 0.5) * 200}px
+                )`;
+        });
+
 
         setTimeout(() => {
 
-            const spark =
-                document.createElement("div");
+            particle.remove();
 
-
-            spark.className =
-                "spark";
-
-
-            spark.textContent =
-                symbols[
-                Math.floor(
-                    Math.random() *
-                    symbols.length
-                )
-                ];
-
-
-            spark.style.left =
-                Math.random() *
-                100 +
-                "vw";
-
-
-            spark.style.top =
-                (
-                    45 +
-                    Math.random() *
-                    50
-                ) +
-                "vh";
-
-
-            spark.style.fontSize =
-                (
-                    10 +
-                    Math.random() *
-                    15
-                ) +
-                "px";
-
-
-            document.body.appendChild(
-                spark
-            );
-
-
-            setTimeout(() => {
-
-                spark.remove();
-
-            }, 2600);
-
-        }, i * 45);
+        }, 1900);
     }
 }
 
 
 /* =========================================
-   HUELLAS
+   HUELLAS DEL MAPA
 ========================================= */
 
 function createFootprints() {
 
-    for (
-        let i = 0;
-        i < 18;
-        i++
-    ) {
+    for (let i = 0; i < 18; i++) {
+
+        const footprint =
+            document.createElement("div");
+
+        footprint.textContent = "👣";
+
+        footprint.style.position = "fixed";
+
+        footprint.style.left =
+            Math.random() * 90 + 5 + "vw";
+
+        footprint.style.top =
+            Math.random() * 80 + 10 + "vh";
+
+        footprint.style.pointerEvents = "none";
+
+        footprint.style.opacity = "0";
+
+        footprint.style.zIndex = "9998";
+
+        footprint.style.fontSize = "1.2rem";
+
+        footprint.style.transition =
+            "opacity 0.8s ease";
+
+        document.body.appendChild(footprint);
 
         setTimeout(() => {
 
-            const footprint =
-                document.createElement("div");
+            footprint.style.opacity = "0.7";
 
+        }, i * 80);
 
-            footprint.className =
-                "footprint";
+        setTimeout(() => {
 
+            footprint.style.opacity = "0";
 
-            footprint.textContent =
-                "👣";
+        }, 2500 + i * 80);
 
+        setTimeout(() => {
 
-            footprint.style.left =
-                (
-                    18 +
-                    i * 3.5
-                ) +
-                "%";
+            footprint.remove();
 
-
-            footprint.style.top =
-                (
-                    62 +
-                    Math.sin(i) * 9
-                ) +
-                "%";
-
-
-            footprint.style.transform =
-                "rotate(" +
-                (i % 2 ? 15 : -15) +
-                "deg)";
-
-
-            document.body.appendChild(
-                footprint
-            );
-
-
-            setTimeout(() => {
-
-                footprint.remove();
-
-            }, 1900);
-
-        }, i * 110);
+        }, 3500 + i * 80);
     }
 }
 
@@ -335,17 +306,16 @@ function createFootprints() {
    TECLA ENTER
 ========================================= */
 
-swearButton.addEventListener(
-    "keydown",
-    (event) => {
+document.addEventListener("keydown", (event) => {
 
-        if (
-            event.key === "Enter"
-        ) {
+    if (
+        event.key === "Enter" &&
+        !mapSection.classList.contains("hidden") &&
+        mapSecret.classList.contains("hidden")
+    ) {
 
-            revealMap();
-
-        }
-
+        swearButton.click();
     }
-);
+
+});
+```

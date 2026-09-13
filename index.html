@@ -1,440 +1,261 @@
+```html
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    ```
-    <title>Una carta para ti 🪄</title>
+    <title>Una carta para ti ✨</title>
 
     <link rel="stylesheet" href="styles.css">
-    ```
-
 </head>
 
 <body>
 
-    ```
-    <!-- ==============================
-     FONDO
-=============================== -->
-
-    <div class="sky"></div>
-    <div class="stars"></div>
-    <div class="stars2"></div>
-
-
-    <!-- ==============================
-     MÚSICA
-=============================== -->
+    <!-- =========================================
+         MÚSICA
+    ========================================== -->
 
     <audio id="music" preload="auto" loop>
         <source src="Leaving Hogwarts.mp3" type="audio/mpeg">
     </audio>
 
-    <button class="music" id="musicBtn" onclick="toggleMusic()">
-        🎵 Música: OFF
+    <button id="musicButton" class="music-button hidden">
+        🎵 Música
     </button>
 
 
-    <!-- ==============================
-     PANTALLA INICIAL
-=============================== -->
+    <!-- =========================================
+         ETAPA 1 — INICIO
+    ========================================== -->
 
-    <section class="screen" id="intro">
+    <section id="intro" class="screen intro-screen">
 
-        <div class="intro">
+        <div class="stars"></div>
 
-            <div class="owl">
-                🦉
-            </div>
+        <div class="owl">🦉</div>
 
-            <h1>
-                Tienes una carta
-            </h1>
+        <h1>Tienes una carta</h1>
 
-            <p>
-                Ha llegado por medios mágicos...
-            </p>
+        <p>
+            Ha llegado por medios mágicos...
+        </p>
 
-            <button class="gold-btn" onclick="openLetter()">
+        <p class="small-text">
+            Y parece que alguien tiene algo importante que decirte.
+        </p>
 
-                🪄 Abrir carta
-
-            </button>
-
-            <p class="hint">
-                Recomendación: abre la carta con sonido.
-            </p>
-
-        </div>
+        <button id="openLetter" class="magic-button">
+            🪄 Abrir carta
+        </button>
 
     </section>
 
 
-    <!-- ==============================
-     CARTA
-=============================== -->
+    <!-- =========================================
+         ETAPA 2 — CARTA
+    ========================================== -->
 
-    <section class="letter-wrap" id="letterSection">
+    <section id="letter" class="screen letter-screen hidden">
 
-        <article class="letter">
+        <div class="letter-container">
 
-
-            <!-- Decoraciones -->
-
-            <div class="corner tl">
-                ✦
+            <div class="letter-header">
+                <span>MINISTERIO DE MAGIA</span>
+                <span>✦</span>
+                <span>DEPARTAMENTO DE RECONCILIACIONES</span>
             </div>
 
-            <div class="corner tr">
-                ✦
-            </div>
+            <div class="letter-content">
 
-            <div class="corner bl">
-                ✦
-            </div>
+                <p class="letter-date">
+                    Para: <strong>MIRIAM ANDREA HERNANDEZ ROBLES</strong>
+                </p>
 
-            <div class="corner br">
-                ✦
-            </div>
-
-
-            <!-- Sello -->
-
-            <div class="seal">
-                🦉
-            </div>
-
-
-            <!-- Título -->
-
-            <h2>
-                Una carta para ti
-            </h2>
-
-            <div class="subtitle">
-                Entregada por medios mágicos ✨
-            </div>
-
-
-            <!-- Destinatario -->
-
-            <div class="recipient">
-
-                Para:
-
-                <strong>
-                    MIRIAM ANDREA HERNANDEZ ROBLES
-                </strong>
-
-                ❤️
-
-            </div>
-
-
-            <!-- Mensaje -->
-
-            <div class="message">
+                <p>
+                    Querida Miriam:
+                </p>
 
                 <p>
                     Prometo que mis intenciones no eran malas...
                 </p>
 
+                <p>
+                    Solo que, aparentemente, hice algún hechizo mal
+                    y terminé haciendo enojar a la persona que más quiero.
+                </p>
 
                 <p>
-
-                    ¡Traigo
-
-                    <span class="magic">
-                        paz, amor y la Capa de Invisibilidad
-                    </span>
-
+                    ¡Traigo paz, amor y la Capa de Invisibilidad
                     por si quieres desaparecer conmigo un rato!
-
                 </p>
 
-
                 <p>
-
-                    Te envié tus
-
-                    <span class="magic">
-                        Pociones de la Felicidad
-                    </span>
-
+                    También te envié tus
+                    <strong>Pociones de la Felicidad</strong>
                     (papas, galletas y chocolates)
-
                     para curar cualquier hechizo de enojo.
-
                 </p>
-
 
                 <p>
+                    ¿Me perdonas, o tengo que mandarte un Vociferador?
+                </p>
 
-                    ¿Me perdonas, o tengo que mandarte un
+                <div class="magic-highlight">
+                    <span>✨ Después de todo... ✨</span>
 
-                    <span class="magic">
-                        Vociferador
-                    </span>
+                    <strong>
+                        tú eres mi magia favorita.
+                    </strong>
+                </div>
 
-                    ?
-
+                <p class="signature">
+                    Con amor,
+                    <br>
+                    <strong>
+                        MIGUEL ANGEL MANZANILLA CASTRO
+                    </strong>
                 </p>
 
             </div>
 
+            <div class="letter-footer">
+                <p>
+                    Hechizo utilizado: <em>Amor verdadero</em>
+                </p>
 
-            <!-- Frase -->
-
-            <div class="highlight">
-
-                ✨ Después de todo... ✨
-
-                <br>
-
-                tú eres mi magia favorita.
-
+                <p>
+                    Ministerio de Magia — Departamento de Reconciliaciones
+                </p>
             </div>
 
 
-            <!-- Firma -->
+            <!-- BOTÓN PARA PASAR AL MAPA -->
 
-            <div class="signature">
-
-                Con cariño,
-
-                <br>
-
-                <strong>
-                    MIGUEL ANGEL MANZANILLA CASTRO
-                </strong>
-
-                ❤️
-
-            </div>
-
-
-            <!-- Footer -->
-
-            <div class="footer">
-
-                Hechizo utilizado:
-
-                <span class="magic">
-                    Amor verdadero
-                </span>
-
-                <br>
-                <br>
-
-                Ministerio de Magia —
-                Departamento de Reconciliaciones
-
-            </div>
-
-
-            <!-- Aviso -->
-
-            <div class="scroll-hint" id="scrollHint">
-
+            <button id="continueToMap" class="continue-button">
                 ↓ La carta todavía no termina...
-
-            </div>
-
-
-        </article>
-
-    </section>
-
-
-    <!-- ==============================
-     MAPA DEL MERODEADOR
-=============================== -->
-
-    <section class="map-section" id="mapSection">
-
-        <div class="map">
-
-
-            <!-- Caminos -->
-
-            <div class="path p1"></div>
-            <div class="path p2"></div>
-            <div class="path p3"></div>
-            <div class="path p4"></div>
-
-
-            <!-- Título -->
-
-            <h2 class="map-title">
-
-                El Mapa del Merodeador
-
-            </h2>
-
-
-            <div class="map-sub">
-
-                Porque algunas cosas solo aparecen
-                cuando sabes dónde mirar...
-
-            </div>
-
-
-            <!-- Frase interactiva -->
-
-            <button class="swear" id="swearButton" onclick="revealMap()">
-
-                "Juro solemnemente que
-                mis intenciones no son buenas."
-
             </button>
-
-
-            <!-- Contenido oculto -->
-
-            <div class="map-secret" id="mapSecret">
-
-                <p>
-
-                    Parece que has encontrado algo
-                    que no estaba destinado a aparecer
-                    a simple vista...
-
-                </p>
-
-
-                <p>
-
-                    Hay una última cosa
-                    que quiero decirte.
-
-                </p>
-
-
-                <button class="gold-btn" onclick="showFinal()">
-
-                    ✨ Revelar el último mensaje
-
-                </button>
-
-            </div>
-
 
         </div>
 
     </section>
 
 
-    <!-- ==============================
-     MENSAJE FINAL
-=============================== -->
+    <!-- =========================================
+         ETAPA 3 — MAPA DEL MERODEADOR
+    ========================================== -->
 
-    <section class="final" id="finalSection">
+    <section id="mapSection" class="screen map-section hidden">
 
-        <div class="final-inner">
+        <div class="map">
 
+            <div class="map-title">
+                <span>✦</span>
+
+                <h2>El Mapa del Merodeador</h2>
+
+                <span>✦</span>
+            </div>
+
+            <p class="map-subtitle">
+                Los secretos aparecen solamente para quien sabe
+                pronunciar las palabras correctas...
+            </p>
+
+            <div class="map-path"></div>
+
+            <button id="swearButton" class="oath-button">
+                "Juro solemnemente que mis intenciones no son buenas."
+            </button>
+
+            <!-- MENSAJE OCULTO DEL MAPA -->
+
+            <div id="mapSecret" class="map-secret hidden">
+
+                <div class="footprints">
+                    👣　👣　👣
+                </div>
+
+                <p>
+                    El mapa ha reconocido tus intenciones...
+                </p>
+
+                <p class="secret-message">
+                    Y parece que hay algo escrito
+                    entre las líneas que nadie más puede ver.
+                </p>
+
+                <button id="finalButton" class="final-button">
+                    ✨ Revelar el último mensaje
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         ETAPA 4 — MENSAJE FINAL
+    ========================================== -->
+
+    <section id="finalSection" class="screen final-section hidden">
+
+        <div class="final-content">
 
             <div class="candle">
                 🕯️
             </div>
 
-
             <h2>
-
-                Antes de cerrar
-                esta carta...
-
+                Antes de cerrar esta carta...
             </h2>
 
-
-            <div class="final-text">
-
+            <div class="final-message">
 
                 <p>
-
-                    Sé que estás enojada conmigo.
-
-                    Sé que quizá no quieras hablar conmigo
-                    durante un tiempo,
-
-                    y lo voy a respetar.
-
+                    Hay algo que quiero que recuerdes.
                 </p>
-
 
                 <p>
-
-                    No quiero presionarte para que estés bien
-                    ni pedirte que olvides lo que pasó.
-
-                    Si necesitas tiempo para sanar,
-
-                    te lo voy a dar.
-
+                    No importa cuántos hechizos existan,
+                    cuántos mundos mágicos haya
+                    o cuántas aventuras podamos vivir...
                 </p>
 
+                <p class="final-highlight">
+                    Yo siempre voy a elegirte a ti.
+                </p>
 
                 <p>
-
-                    Solo quiero que sepas que no quiero
-                    seguir así contigo.
-
-                    Me importas muchísimo y espero
-                    de corazón que,
-
-                    cuando estés lista,
-                    puedas sentirte mejor.
-
+                    Perdón por haberte hecho enojar.
+                    Nunca fue mi intención lastimarte.
                 </p>
-
 
                 <p>
-
-                    No tienes que responder ahora.
-
-                    Solo quería que supieras
-                    que aquí estoy.
-
+                    Espero que puedas perdonarme
+                    y que podamos seguir escribiendo
+                    nuestra propia historia.
                 </p>
 
+                <p class="love">
+                    ❤️ Te quiero.
+                </p>
 
             </div>
 
-
-            <div class="final-sign">
-
-                Con todo mi cariño,
-
-                <br>
-
-                Miguel ❤️
-
-            </div>
-
-
-            <div class="end">
-
-                MISCHIEF MANAGED ✦
-
-            </div>
-
+            <p class="final-signature">
+                — Miguel
+            </p>
 
         </div>
 
     </section>
 
 
-    <!-- ==============================
-     JAVASCRIPT
-=============================== -->
-
     <script src="script.js"></script>
-    ```
 
 </body>
-
 </html>
+```
