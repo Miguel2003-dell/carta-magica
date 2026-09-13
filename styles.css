@@ -16,7 +16,7 @@ html {
 body {
     margin: 0;
     height: 100vh;
-    overflow: hidden;          /* ← sin scroll */
+    overflow: hidden;
     color: #f5e8c4;
     font-family: "Crimson Text", serif;
     background:
@@ -104,7 +104,7 @@ button {
     justify-content: center;
     padding: 24px;
     text-align: center;
-    overflow-y: auto;        /* scroll interno solo si el contenido es largo */
+    overflow-y: auto;
 }
 
 
@@ -387,8 +387,8 @@ h1 {
 
 .map {
     width: min(820px, 100%);
-    max-height: 90vh;          /* ← limitar altura para que quepa */
-    overflow-y: auto;         /* ← scroll interno si el contenido crece */
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
     padding: 50px 35px;
     background:
@@ -625,6 +625,20 @@ h1 {
 
 @media (max-width: 600px) {
 
+    /* ---- Páginas: padding superior más grande para celular ---- */
+    .page {
+        padding: 60px 16px 24px;
+    }
+
+    /* ---- Botón música: bajar para que no tape ---- */
+    .music {
+        top: auto;
+        bottom: 14px;
+        right: 14px;
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
     .owl {
         font-size: 60px;
     }
@@ -639,6 +653,20 @@ h1 {
 
     .message {
         text-align: left;
+        font-size: 18px;
+    }
+
+    .highlight {
+        font-size: 20px;
+        margin: 24px 0;
+    }
+
+    .signature {
+        font-size: 18px;
+    }
+
+    .footer {
+        font-size: 13px;
     }
 
     .map {
@@ -652,6 +680,50 @@ h1 {
 
     .map-sub {
         font-size: 16px;
+    }
+
+    .map-secret p {
+        font-size: 18px;
+    }
+
+    #finalSection h2 {
+        font-size: clamp(22px, 6vw, 34px);
+        margin: 16px 0 24px;
+    }
+
+    .final-text {
+        font-size: 18px;
+        line-height: 1.75;
+    }
+
+    .final-sign {
+        font-size: 17px;
+    }
+
+    .end {
+        margin-top: 30px;
+        font-size: 12px;
+    }
+
+    .candle {
+        font-size: 38px;
+    }
+
+    .gold-btn {
+        padding: 12px 22px;
+        font-size: 14px;
+    }
+
+    /* ---- Safe area para celulares con notch ---- */
+    .page {
+        padding-top: env(safe-area-inset-top, 60px);
+        padding-left: env(safe-area-inset-left, 16px);
+        padding-right: env(safe-area-inset-right, 16px);
+    }
+
+    .music {
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+        right: calc(14px + env(safe-area-inset-right, 0px));
     }
 
 }
