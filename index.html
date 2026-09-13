@@ -1,0 +1,531 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Una carta para ti 🪄</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 50% 40%, #18233b 0%, #090d18 45%, #03050a 100%);
+            color: #f4e7bd;
+            font-family: "Crimson Text", serif;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+   ESTRELLAS
+========================= */
+
+        .stars,
+        .stars::before,
+        .stars::after {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .stars {
+            background-image:
+                radial-gradient(#fff 1px, transparent 1px),
+                radial-gradient(#fff 1px, transparent 1px);
+            background-size: 100px 100px, 170px 170px;
+            background-position: 20px 30px, 70px 90px;
+            opacity: .25;
+            animation: starsMove 30s linear infinite;
+        }
+
+        @keyframes starsMove {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-100px);
+            }
+        }
+
+        /* =========================
+   INTRO
+========================= */
+
+        .intro {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro-content {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .owl {
+            font-size: 75px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 15px rgba(255, 220, 130, .35));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .intro h1 {
+            font-family: "Cinzel", serif;
+            color: #e6c76a;
+            font-size: clamp(28px, 7vw, 48px);
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .intro p {
+            color: #c8b98e;
+            font-size: 20px;
+            margin: 15px 0 35px;
+            font-style: italic;
+        }
+
+        .open-button {
+            background: linear-gradient(135deg, #d8b65b, #9b7730);
+            border: none;
+            color: #171006;
+            padding: 15px 32px;
+            border-radius: 5px;
+            font-family: "Cinzel", serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(220, 185, 90, .25);
+            transition: .3s;
+        }
+
+        .open-button:hover {
+            transform: scale(1.06);
+            box-shadow: 0 0 35px rgba(220, 185, 90, .5);
+        }
+
+        /* =========================
+   CARTA
+========================= */
+
+        .letter-container {
+            min-height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 18px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .letter-container.show {
+            display: flex;
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .letter {
+            width: 100%;
+            max-width: 760px;
+            background:
+                linear-gradient(rgba(55, 34, 17, .96),
+                    rgba(31, 19, 10, .98));
+            border: 1px solid #b9974d;
+            border-radius: 5px;
+            padding: clamp(25px, 6vw, 55px);
+            box-shadow:
+                0 0 60px rgba(212, 175, 75, .15),
+                inset 0 0 70px rgba(0, 0, 0, .45);
+            position: relative;
+            animation: letterAppear 1.2s cubic-bezier(.2, .8, .2, 1);
+        }
+
+        @keyframes letterAppear {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(.94);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .corner {
+            position: absolute;
+            color: #b9974d;
+            font-size: 25px;
+        }
+
+        .top-left {
+            top: 15px;
+            left: 18px;
+        }
+
+        .top-right {
+            top: 15px;
+            right: 18px;
+        }
+
+        .bottom-left {
+            bottom: 15px;
+            left: 18px;
+        }
+
+        .bottom-right {
+            bottom: 15px;
+            right: 18px;
+        }
+
+        .seal {
+            width: 75px;
+            height: 75px;
+            border: 2px solid #b9974d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -5px auto 25px;
+            font-size: 35px;
+            box-shadow: 0 0 20px rgba(212, 175, 75, .25);
+        }
+
+        .letter h2 {
+            text-align: center;
+            font-family: "Cinzel", serif;
+            color: #e6c76a;
+            font-size: clamp(26px, 6vw, 40px);
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #aa9a76;
+            font-style: italic;
+            font-size: 17px;
+            margin: 8px 0 35px;
+        }
+
+        .recipient {
+            font-size: 23px;
+            margin-bottom: 25px;
+        }
+
+        .message {
+            font-size: clamp(19px, 3vw, 22px);
+            line-height: 1.85;
+        }
+
+        .message p {
+            margin: 0 0 22px;
+        }
+
+        .magic {
+            color: #e6c76a;
+            font-weight: 600;
+        }
+
+        .highlight {
+            text-align: center;
+            font-size: 25px;
+            color: #e6c76a;
+            margin: 35px 0;
+        }
+
+        .signature {
+            text-align: right;
+            font-size: 22px;
+            font-style: italic;
+            margin-top: 40px;
+        }
+
+        .footer {
+            border-top: 1px solid rgba(185, 151, 77, .3);
+            margin-top: 35px;
+            padding-top: 20px;
+            text-align: center;
+            color: #9e906f;
+            font-size: 15px;
+        }
+
+        /* =========================
+   PARTICULAS
+========================= */
+
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            font-size: 15px;
+            z-index: 10;
+            animation: particle 2.5s ease-out forwards;
+        }
+
+        @keyframes particle {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(.5);
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-150px) scale(1.4) rotate(180deg);
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* =========================
+   RESPONSIVE
+========================= */
+
+        @media (max-width: 600px) {
+
+            .intro {
+                padding: 20px;
+            }
+
+            .owl {
+                font-size: 60px;
+            }
+
+            .intro p {
+                font-size: 18px;
+            }
+
+            .letter {
+                padding: 35px 24px;
+            }
+
+            .recipient {
+                font-size: 21px;
+            }
+
+            .message {
+                font-size: 19px;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="stars"></div>
+
+    <!-- =========================
+     PANTALLA INICIAL
+========================= -->
+
+    <section class="intro" id="intro">
+
+        <div class="intro-content">
+
+            <div class="owl">🦉</div>
+
+            <h1>Tienes una carta</h1>
+
+            <p>
+                Ha llegado por medios mágicos...
+            </p>
+
+            <button class="open-button" onclick="openLetter()">
+                🪄 Abrir carta
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+     CARTA
+========================= -->
+
+    <section class="letter-container" id="letterContainer">
+
+        <article class="letter">
+
+            <div class="corner top-left">✦</div>
+            <div class="corner top-right">✦</div>
+            <div class="corner bottom-left">✦</div>
+            <div class="corner bottom-right">✦</div>
+
+            <div class="seal">
+                🦉
+            </div>
+
+            <h2>Una carta para ti</h2>
+
+            <div class="subtitle">
+                Entregada por medios mágicos ✨
+            </div>
+
+            <div class="recipient">
+                Para:
+                <strong>[MIRIAM ANDREA HERNANDEZ ROBLES]</strong> ❤️
+            </div>
+
+            <div class="message">
+
+                <p>
+                    Prometo que mis intenciones no eran malas...
+                </p>
+
+                <p>
+                    ¡Traigo
+                    <span class="magic">
+                        paz, amor y la Capa de Invisibilidad
+                    </span>
+                    por si quieres desaparecer conmigo un rato!
+                </p>
+
+                <p>
+                    Te envié tus
+                    <span class="magic">
+                        Pociones de la Felicidad
+                    </span>
+                    (papas, galletas y chocolates) para curar cualquier
+                    hechizo de enojo.
+                </p>
+
+                <p>
+                    ¿Me perdonas, o tengo que mandarte un
+                    <span class="magic">
+                        Vociferador
+                    </span>?
+                </p>
+
+            </div>
+
+            <div class="highlight">
+                ✨ Después de todo... ✨<br>
+                tú eres mi magia favorita.
+            </div>
+
+            <div class="signature">
+                Con cariño,<br>
+                <strong>[MIGUEL ANGEL MANZANILLA CASTRO]</strong> ❤️
+            </div>
+
+            <div class="footer">
+                Hechizo utilizado:
+                <span class="magic">Amor verdadero</span>
+                <br><br>
+                Ministerio de Magia — Departamento de Reconciliaciones
+            </div>
+
+        </article>
+
+    </section>
+
+
+    <script>
+
+        function openLetter() {
+
+            // Ocultar introducción
+            document.getElementById("intro").classList.add("hidden");
+
+            // Mostrar carta
+            document.getElementById("letterContainer").classList.add("show");
+
+            // Crear magia
+            createMagic();
+
+        }
+
+
+        /* =========================
+           PARTICULAS MAGICAS
+        ========================= */
+
+        function createMagic() {
+
+            const symbols = ["✨", "⭐", "✦", "✧", "🪄"];
+
+            for (let i = 0; i < 45; i++) {
+
+                setTimeout(() => {
+
+                    const particle = document.createElement("div");
+
+                    particle.className = "particle";
+
+                    particle.innerText =
+                        symbols[Math.floor(Math.random() * symbols.length)];
+
+                    particle.style.left =
+                        Math.random() * 100 + "vw";
+
+                    particle.style.top =
+                        (50 + Math.random() * 45) + "vh";
+
+                    particle.style.fontSize =
+                        (10 + Math.random() * 15) + "px";
+
+                    document.body.appendChild(particle);
+
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 2500);
+
+                }, i * 70);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+```
